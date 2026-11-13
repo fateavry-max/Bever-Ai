@@ -1,0 +1,6 @@
+{
+  "name": "BEVER — Human Intelligence. Better AI.",
+  "description": "Global AI training and human intelligence platform connecting talented specialists to train, evaluate, and advance artificial intelligence systems.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

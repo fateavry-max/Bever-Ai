@@ -1,0 +1,70 @@
+{
+  "entities": {
+    "UserAccount": {
+      "title": "UserAccount",
+      "description": "Authenticated BEVER user account provisioned via Google Sign-Up or registration",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Authentication user UID",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Verified user email address",
+          "minLength": 3,
+          "maxLength": 200
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User full name",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "role": {
+          "type": "string",
+          "enum": ["contributor", "business"],
+          "description": "User workspace role (admin cannot be self-assigned)"
+        },
+        "orgName": {
+          "type": "string",
+          "description": "Organization name for business accounts",
+          "maxLength": 140
+        },
+        "domainInterest": {
+          "type": "string",
+          "description": "Primary domain interest for contributor accounts",
+          "maxLength": 120
+        },
+        "authProvider": {
+          "type": "string",
+          "enum": ["google"],
+          "description": "Authentication provider identifier"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server update timestamp"
+        }
+      },
+      "required": ["uid", "email", "displayName", "role", "authProvider", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserAccount"
+      },
+      "description": "Private user account documents indexed by Firebase Auth UID"
+    }
+  }
+}
